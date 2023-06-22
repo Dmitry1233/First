@@ -167,15 +167,32 @@ class ViewController: UIViewController {
                     height: square - spacing)
                 view.backgroundColor = .blue
                 self.view.addSubview(view)
+                print(self.view.subviews.count)
             }
-            
+            print(view.subviews.count)
         }
+        print(view.subviews.count)
+        view.subviews[77].backgroundColor = .green
         
-        
-        
-        
-        
-        
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
+        view.addSubview(stack) //вставили стак в иерархию
+        //stack.heightAnchor.constraint(equalToConstant: 30).isActive = true //задали высоту стака
+       // stack.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //задали ширину стака
+        stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stack.backgroundColor = .red
+        stack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+       // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
+        (0..<15).forEach { a in
+            let label = UILabel()
+            label.text = String(a)
+            stack.addArrangedSubview(label)
+            label.textAlignment = .center
+        }
+        stack.spacing = 3
+        //stack.distribution = .fillEqually
+        stack.axis = .vertical
     }
     
     @objc private func onTap() {
@@ -198,6 +215,8 @@ class ViewController: UIViewController {
         })
         
         
+        
+        
 //        print(123)
 //        UIView.animate(withDuration: 0.5) {
 //            self.myView?.backgroundColor = UIColor(
@@ -218,3 +237,5 @@ extension CGFloat {
         CGFloat(Float.random(in: 0...255))/255
     }
 }
+
+
