@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.lightText
-    
+        view.backgroundColor = .white
+        
         
 //        var myView = UIView.init()
 //        var label = UILabel()
@@ -144,55 +144,64 @@ class ViewController: UIViewController {
 //        }
         
         
-        var maxWidth:CGFloat = 0
-        
-        (0 ..< 10).forEach { raw in
-            let label = UILabel()
-            label.text = String(10-raw)
-            label.sizeToFit()
-            view.addSubview(label)
-            maxWidth = max(maxWidth, label.frame.width)
-            label.frame.size.width = maxWidth
-            label.textAlignment = .right
-            let spacing:CGFloat = 1
-            let square = (view.frame.width - maxWidth - spacing) / 10
-            label.frame.origin.y = square * CGFloat(raw)
+//        var maxWidth:CGFloat = 0
+//
+//        (0 ..< 10).forEach { raw in
+//            let label = UILabel()
+//            label.text = String(10-raw)
+//            label.sizeToFit()
+//            view.addSubview(label)
+//            maxWidth = max(maxWidth, label.frame.width)
+//            label.frame.size.width = maxWidth
+//            label.textAlignment = .right
+//            let spacing:CGFloat = 1
+//            let square = (view.frame.width - maxWidth - spacing) / 10
+//            label.frame.origin.y = square * CGFloat(raw)
+//
+//            (0..<10).forEach { column in
+//                let view = UIView()
+//                view.frame = CGRect(
+//                    x: maxWidth + spacing + square * CGFloat(column),
+//                    y: square * CGFloat(raw),
+//                    width: square - spacing,
+//                    height: square - spacing)
+//                view.backgroundColor = .blue
+//                self.view.addSubview(view)
+//                print(self.view.subviews.count)
+//            }
+//            print(view.subviews.count)
+//        }
+//        print(view.subviews.count)
+//        view.subviews[77].backgroundColor = .green
+        let vStack = UIStackView()
+        (0..<10).forEach { d in
             
-            (0..<10).forEach { column in
+            let hStack = UIStackView()
+            vStack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
+            view.addSubview(vStack) //вставили стак в иерархию
+            //stack.heightAnchor.constraint(equalToConstant: 30).isActive = true //задали высоту стака
+            //stack.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //задали ширину стака
+            vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            vStack.backgroundColor = .red
+            vStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+           // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
+            (0..<10).forEach { a in
                 let view = UIView()
-                view.frame = CGRect(
-                    x: maxWidth + spacing + square * CGFloat(column),
-                    y: square * CGFloat(raw),
-                    width: square - spacing,
-                    height: square - spacing)
-                view.backgroundColor = .blue
-                self.view.addSubview(view)
-                print(self.view.subviews.count)
+                hStack.spacing = 5
+                hStack.axis = .horizontal
+                view.backgroundColor = .black
+                view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                view.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                hStack.addArrangedSubview(view)
+                hStack.backgroundColor = .red
             }
-            print(view.subviews.count)
+            vStack.addArrangedSubview(hStack)
+            vStack.spacing = 5
+            //stack.distribution = .fillEqually
+            vStack.axis = .vertical
         }
-        print(view.subviews.count)
-        view.subviews[77].backgroundColor = .green
         
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
-        view.addSubview(stack) //вставили стак в иерархию
-        //stack.heightAnchor.constraint(equalToConstant: 30).isActive = true //задали высоту стака
-       // stack.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //задали ширину стака
-        stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stack.backgroundColor = .red
-        stack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-       // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
-        (0..<15).forEach { a in
-            let label = UILabel()
-            label.text = String(a)
-            stack.addArrangedSubview(label)
-            label.textAlignment = .center
-        }
-        stack.spacing = 3
-        //stack.distribution = .fillEqually
-        stack.axis = .vertical
     }
     
     @objc private func onTap() {
