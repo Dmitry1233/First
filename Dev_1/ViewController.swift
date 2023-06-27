@@ -210,6 +210,15 @@ class ViewController: UIViewController {
         
         let hStack2 = UIStackView()
         hStack2.backgroundColor = .blue
+        
+        let hLabel2 = UILabel()
+       
+        hLabel2.textAlignment = .center
+        hLabel2.backgroundColor = .green
+        hLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        hLabel2.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        hStack2.addArrangedSubview(hLabel2)
+        
         (1..<11).forEach { a in
             let hLabel = UILabel()
             hLabel.text = String(a)
