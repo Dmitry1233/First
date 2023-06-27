@@ -174,7 +174,7 @@ class ViewController: UIViewController {
 //        print(view.subviews.count)
 //        view.subviews[77].backgroundColor = .green
         let vStack = UIStackView()
-        (0..<10).forEach { d in
+        (1..<11).forEach { d in
             
             let hStack = UIStackView()
             vStack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
@@ -184,8 +184,14 @@ class ViewController: UIViewController {
             vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             vStack.backgroundColor = .red
-            vStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+            vStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
            // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
+            let label = UILabel()
+            label.text = String(d)
+            hStack.addArrangedSubview(label)
+            label.textAlignment = .center
+            label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            label.widthAnchor.constraint(equalToConstant: 30).isActive = true
             (0..<10).forEach { a in
                 let view = UIView()
                 hStack.spacing = 5
@@ -194,13 +200,35 @@ class ViewController: UIViewController {
                 view.heightAnchor.constraint(equalToConstant: 30).isActive = true
                 view.widthAnchor.constraint(equalToConstant: 30).isActive = true
                 hStack.addArrangedSubview(view)
-                hStack.backgroundColor = .red
             }
             vStack.addArrangedSubview(hStack)
             vStack.spacing = 5
             //stack.distribution = .fillEqually
             vStack.axis = .vertical
         }
+        
+        
+        let hStack2 = UIStackView()
+        hStack2.backgroundColor = .blue
+        (1..<11).forEach { a in
+            let hLabel = UILabel()
+            hLabel.text = String(a)
+            
+            hLabel.textAlignment = .center
+            hLabel.backgroundColor = .green
+            hLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            hLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            hStack2.addArrangedSubview(hLabel)
+        }
+        hStack2.spacing = 5
+        //stack.distribution = .fillEqually
+//        hStack2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
+
+        hStack2.axis = .horizontal
+        vStack.addArrangedSubview(hStack2)
+        
+
+
         
     }
     
