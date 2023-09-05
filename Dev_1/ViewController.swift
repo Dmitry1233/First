@@ -9,11 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
     var myView: UIView?
-    
+
+    // тк обьект еще нам понадобится и я это знаю, то сразу в переменной сохраняю чтобы потом иметь доступ
+    private let gameBoard = GameBoard(itemColor: .blue)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .white
+
+        gameBoard.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(gameBoard)
+        gameBoard.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        gameBoard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
+        gameBoard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        gameBoard.heightAnchor.constraint(equalTo: gameBoard.widthAnchor).isActive = true
+
         
         
 //        var myView = UIView.init()
@@ -173,69 +183,75 @@ class ViewController: UIViewController {
 //        }
 //        print(view.subviews.count)
 //        view.subviews[77].backgroundColor = .green
-        let vStack = UIStackView()
-        (1..<11).forEach { d in
-            
-            let hStack = UIStackView()
-            vStack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
-            view.addSubview(vStack) //вставили стак в иерархию
-            //stack.heightAnchor.constraint(equalToConstant: 30).isActive = true //задали высоту стака
-            //stack.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //задали ширину стака
-            vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            vStack.backgroundColor = .red
-            vStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-           // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
-            let label = UILabel()
-            label.text = String(d)
-            hStack.addArrangedSubview(label)
-            label.textAlignment = .center
-            label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            label.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            (0..<10).forEach { a in
-                let view = UIView()
-                hStack.spacing = 5
-                hStack.axis = .horizontal
-                view.backgroundColor = .black
-                view.heightAnchor.constraint(equalToConstant: 30).isActive = true
-                view.widthAnchor.constraint(equalToConstant: 30).isActive = true
-                hStack.addArrangedSubview(view)
-            }
-            vStack.addArrangedSubview(hStack)
-            vStack.spacing = 5
-            //stack.distribution = .fillEqually
-            vStack.axis = .vertical
-        }
-        
-        
-        let hStack2 = UIStackView()
-        hStack2.backgroundColor = .blue
-        
-        let hLabel2 = UILabel()
-       
-        hLabel2.textAlignment = .center
-        hLabel2.backgroundColor = .green
-        hLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        hLabel2.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        hStack2.addArrangedSubview(hLabel2)
-        
-        (1..<11).forEach { a in
-            let hLabel = UILabel()
-            hLabel.text = String(a)
-            
-            hLabel.textAlignment = .center
-            hLabel.backgroundColor = .green
-            hLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            hLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            hStack2.addArrangedSubview(hLabel)
-        }
-        hStack2.spacing = 5
-        //stack.distribution = .fillEqually
-//        hStack2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
 
-        hStack2.axis = .horizontal
-        vStack.addArrangedSubview(hStack2)
-        
+
+
+
+
+//
+//        let vStack = UIStackView()
+//        (1..<11).forEach { d in
+//
+//            let hStack = UIStackView()
+//            vStack.translatesAutoresizingMaskIntoConstraints = false //отключили ресайдинг маски
+//            view.addSubview(vStack) //вставили стак в иерархию
+//            //stack.heightAnchor.constraint(equalToConstant: 30).isActive = true //задали высоту стака
+//            //stack.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //задали ширину стака
+//            vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//            //stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//            vStack.backgroundColor = .red
+//            vStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+//           // stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true //дополнительный сдвиг -10
+//            let label = UILabel()
+//            label.text = String(d)
+//            hStack.addArrangedSubview(label)
+//            label.textAlignment = .center
+//            label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//            label.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//            (0..<10).forEach { a in
+//                let view = UIView()
+//                hStack.spacing = 5
+//                hStack.axis = .horizontal
+//                view.backgroundColor = .black
+//                view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//                view.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//                hStack.addArrangedSubview(view)
+//            }
+//            vStack.addArrangedSubview(hStack)
+//            vStack.spacing = 5
+//            //stack.distribution = .fillEqually
+//            vStack.axis = .vertical
+//        }
+//
+//
+//        let hStack2 = UIStackView()
+//        hStack2.backgroundColor = .blue
+//
+//        let hLabel2 = UILabel()
+//
+//        hLabel2.textAlignment = .center
+//        hLabel2.backgroundColor = .green
+//        hLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        hLabel2.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//        hStack2.addArrangedSubview(hLabel2)
+//
+//        (1..<11).forEach { a in
+//            let hLabel = UILabel()
+//            hLabel.text = String(a)
+//
+//            hLabel.textAlignment = .center
+//            hLabel.backgroundColor = .green
+//            hLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//            hLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//            hStack2.addArrangedSubview(hLabel)
+//        }
+//        hStack2.spacing = 5
+//        //stack.distribution = .fillEqually
+////        hStack2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
+//
+//        hStack2.axis = .horizontal
+//        vStack.addArrangedSubview(hStack2)
+//
 
 
         
@@ -284,4 +300,48 @@ extension CGFloat {
     }
 }
 
+// свой класс GameBoard со своим набором методов, от UIView тк наследуемся от минимально достаточного
+final class GameBoard: UIView {
+    // параметры при создании обьекта
+    init(itemColor: UIColor) {
+        let hStacks = (0..<10).map { _ in
+            let items = (0..<10).map { _ in
+                let x = UIView()
+                x.backgroundColor = itemColor
+                return x
+            }
+            let stack = UIStackView(arrangedSubviews: items)
+            stack.distribution = .fillEqually
+            stack.spacing = 1
+            return stack
+        }
+        let vStack = UIStackView(arrangedSubviews: hStacks)
+        vStack.axis = .vertical
+        vStack.spacing = 1
+        vStack.distribution = .fillEqually
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+
+        // тк мы наследуемся, то надо вызвать родительский инит
+        // это не всегда актуально, но в нашем случае нужно, тк нельзя использовать self, пока класс не проинициализирован до конца
+        // а инициализация идет сверху вниз, типа сперва в нашем классе, потом ниже и ниже
+
+        // init есть convenience и required, по этому приходится вызвать этот init у родительского класса
+        super.init(frame: .zero)
+
+        // вот тут как раз неявно идет использование self
+        // ну как неявно, self просто можно не писать когда находишься "внутри себя"
+        // и тк мы в наследнике от UIView, то добавляем "на себя"
+        addSubview(vStack)
+        vStack.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        vStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        vStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        vStack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+
+    // это приходится прописывать (пусть и на генерации) тк любой класс можно создать из сториборда или ксибы
+    // а значит такой инит тоже возможен
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
